@@ -1,5 +1,18 @@
 # `react-router`
 
+## v8.3.0
+
+### Patch Changes
+
+- Encode path params in `href`/`generatePath` per RFC 3986 path-segment rules instead of `encodeURIComponent` ([#15310](https://github.com/remix-run/react-router/pull/15310))
+  - Characters that are valid literally in a path segment (`$ & + , ; = : @` — RFC 3986 `pchar`) are no longer percent-encoded, so values like a semver build `1.0.0+1` interpolate unchanged instead of becoming `1.0.0%2B1`
+  - Structural/unsafe characters (`/ ? # %`, whitespace, non-ASCII) are still escaped exactly as before
+- Use `crypto.randomUUID()` for `createMemorySessionStorage` session ids ([#15302](https://github.com/remix-run/react-router/pull/15302))
+  - `createMemorySessionStorage` is only intended for local development and testing - sessions are lost when the server restarts
+- Fix `NavLink` not applying its `pending` state when `to` has a trailing slash ([#15300](https://github.com/remix-run/react-router/pull/15300))
+- Harden RSC CSRF codepaths. ([#15311](https://github.com/remix-run/react-router/pull/15311))
+- Fix server crash (`TypeError: Invalid state: Unable to enqueue`) when a request is aborted while the RSC HTML stream has a pending flush — `injectRSCPayload` now handles cancellation of its readable side, clears the pending flush, and cancels the underlying RSC payload stream ([#15286](https://github.com/remix-run/react-router/pull/15286))
+
 ## v8.2.0
 
 ### Patch Changes

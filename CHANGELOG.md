@@ -16,6 +16,7 @@ We manage release notes in this file instead of the paginated Github Releases Pa
   <summary>Table of Contents</summary>
 
 - [React Router Releases](#react-router-releases)
+  - [v8.3.0](#v830)
   - [v8.2.0](#v820)
     - [Web Streams Default Server Entry](#web-streams-default-server-entry)
   - [v8.1.0](#v810)
@@ -108,6 +109,27 @@ We manage release notes in this file instead of the paginated Github Releases Pa
   - [v7.0.0](#v700)
 
 </details>
+
+## v8.3.0
+
+Date: 2026-07-16
+
+### Minor Changes
+
+- `@react-router/dev` - Restart `react-router dev` with `--conditions=development` when not already configured ([#15291](https://github.com/remix-run/react-router/pull/15291))
+
+### Patch Changes
+
+- `react-router` - Encode path params in `href`/`generatePath` per RFC 3986 path-segment rules instead of `encodeURIComponent` ([#15310](https://github.com/remix-run/react-router/pull/15310))
+  - Characters that are valid literally in a path segment (`$ & + , ; = : @` — RFC 3986 `pchar`) are no longer percent-encoded, so values like a semver build `1.0.0+1` interpolate unchanged instead of becoming `1.0.0%2B1`
+  - Structural/unsafe characters (`/ ? # %`, whitespace, non-ASCII) are still escaped exactly as before
+- `react-router` - Use `crypto.randomUUID()` for `createMemorySessionStorage` session ids ([#15302](https://github.com/remix-run/react-router/pull/15302))
+  - `createMemorySessionStorage` is only intended for local development and testing - sessions are lost when the server restarts
+- `react-router` - Fix `NavLink` not applying its `pending` state when `to` has a trailing slash ([#15300](https://github.com/remix-run/react-router/pull/15300))
+- `react-router` - Harden RSC CSRF codepaths. ([#15311](https://github.com/remix-run/react-router/pull/15311))
+- `react-router` - Fix server crash (`TypeError: Invalid state: Unable to enqueue`) when a request is aborted while the RSC HTML stream has a pending flush — `injectRSCPayload` now handles cancellation of its readable side, clears the pending flush, and cancels the underlying RSC payload stream ([#15286](https://github.com/remix-run/react-router/pull/15286))
+
+**Full Changelog**: [`v8.2.0...v8.3.0`](https://github.com/remix-run/react-router/compare/react-router@8.2.0...react-router@8.3.0)
 
 ## v8.2.0
 

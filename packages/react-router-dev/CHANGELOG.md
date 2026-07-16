@@ -1,5 +1,18 @@
 # `@react-router/dev`
 
+## v8.3.0
+
+### Minor Changes
+
+- Restart `react-router dev` with `--conditions=development` when not already configured ([#15291](https://github.com/remix-run/react-router/pull/15291))
+
+### Patch Changes
+
+- Updated dependencies:
+  - [`react-router@8.3.0`](https://github.com/remix-run/react-router/releases/tag/react-router@8.3.0)
+  - [`@react-router/node@8.3.0`](https://github.com/remix-run/react-router/releases/tag/@react-router/node@8.3.0)
+  - [`@react-router/serve@8.3.0`](https://github.com/remix-run/react-router/releases/tag/@react-router/serve@8.3.0)
+
 ## v8.2.0
 
 ### Minor Changes
